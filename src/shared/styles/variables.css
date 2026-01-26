@@ -1,0 +1,22 @@
+:root {
+  --white: #fff;
+  --smoke: #ebebeb;
+  --black: #000;
+  --dark: #161616;
+  --blue: #4d81f9;
+  --green: #05df72;
+
+  --background: var(--white);
+  --surface: var(--smoke);
+  --border: var(--black);
+  --text: var(--black);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--black);
+    --surface: var(--dark);
+    --border: var(--white);
+    --text: var(--white);
+  }
+}
