@@ -1,22 +1,10 @@
 :root {
-  --white: #fff;
-  --smoke: #ebebeb;
-  --black: #000;
-  --dark: #161616;
-  --blue: #4d81f9;
-  --green: #05df72;
+  --black: #000000;
+  --black-surface: #191a1b;
+  --black-surface-64: rgba(25, 26, 27, 0.64);
 
-  --background: var(--white);
-  --surface: var(--smoke);
-  --border: var(--black);
-  --text: var(--black);
-}
+  --white: #ffffff;
+  --white-surface: #efefef;
 
-@media screen and (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--black);
-    --surface: var(--dark);
-    --border: var(--white);
-    --text: var(--white);
-  }
+  --red: #eb3939;
 }

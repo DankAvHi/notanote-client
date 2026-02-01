@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "Noto Serif";
+  src: url("../../../public/fonts/NotoSerif-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url("../../../public/fonts/NotoSerif-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Noto Serif";
+  src: url("../../../public/fonts/NotoSerif-Bold.ttf");
+  font-weight: 800;
+}

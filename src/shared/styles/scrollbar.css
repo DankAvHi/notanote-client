@@ -1,19 +1,19 @@
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
   ::-webkit-scrollbar {
-    height: 4px;
+    height: 0.25rem;
   }
 }
 
 ::-webkit-scrollbar-track {
-  background: #16181f;
+  background: var(--white-surface);
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
-  background: #2f333f;
+  background: var(--black-surface);
 }

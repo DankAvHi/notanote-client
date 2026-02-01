@@ -1,0 +1,12 @@
+.MainWrapper {
+  margin: 0 auto;
+  padding: 2.1875rem;
+
+  max-width: 64rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
