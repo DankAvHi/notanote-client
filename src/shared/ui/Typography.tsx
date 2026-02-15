@@ -6,6 +6,7 @@ export type TypographyProps = {
   children?: React.ReactNode;
   color?: "black-surface" | "black-surface-64" | "white";
   size?: "lg" | "4.5xl" | "5xl";
+  weight?: "normal" | "bold";
 };
 
 export const Typography: React.FC<TypographyProps> = ({
@@ -13,6 +14,7 @@ export const Typography: React.FC<TypographyProps> = ({
   children,
   color = "white",
   size = "lg",
+  weight = "normal",
 }) => {
   return (
     <Tag
@@ -23,6 +25,7 @@ export const Typography: React.FC<TypographyProps> = ({
       ${size === "lg" ? "text-lg" : ""}
       ${size === "4.5xl" ? "text-[2.5rem]" : ""}
       ${size === "5xl" ? "text-5xl" : ""}
+      font-${weight}
     `}
     >
       {children}

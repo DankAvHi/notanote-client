@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
+import { cache } from "react";
 import { UserPayload } from "../types";
 
-export const verify = async () => {
+export const verify = cache(async () => {
     try {
 
         const cookieStore = await cookies();
@@ -10,9 +11,9 @@ export const verify = async () => {
             { headers: { "Content-Type": "application/json", "Cookie": allCookies }, credentials: "include", }
         )
 
-        const user: UserPayload = await response.json()
-
         if (!response.ok) return false
+
+        const user: UserPayload = await response.json()
 
         return user
 
@@ -20,4 +21,4 @@ export const verify = async () => {
         console.error(e)
         return false
     }
-}
+})

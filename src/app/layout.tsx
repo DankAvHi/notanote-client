@@ -2,7 +2,7 @@ import { Footer } from "@/widgets/Footer";
 import { Navigation } from "@/widgets/Navigation";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
-import "../shared/styles/index.css";
+import "@/shared/styles/index.css";
 import { AppProvider } from "./AppProvider";
 
 export const metadata: Metadata = {

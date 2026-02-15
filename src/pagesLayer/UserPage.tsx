@@ -1,12 +1,12 @@
-import { ExitButton } from "@/features/exit";
+import { UserCard } from "@/entities/user/ui/UserCard";
 import globalStyles from "@/shared/styles/globalStyles.module.css";
+import { UserActions } from "@/widgets/UserActions";
 
 export const UserPage: React.FC = () => {
   return (
     <main className={globalStyles.MainWrapper}>
-      <section>
-        <ExitButton />
-      </section>
+      <UserCard />
+      <UserActions />
     </main>
   );
 };

@@ -1,0 +1,2 @@
+export { ChangePictureButton } from "./ChangePictureButton";
+

@@ -1,10 +1,8 @@
-"use client";
-
 import { ImageButton, SquareButton } from "@/shared/ui";
-import { useUserContext } from "../model/UserContext";
+import { getUserServer } from "../api";
 
-export const UserButton: React.FC = () => {
-  const { user } = useUserContext();
+export const UserButton: React.FC = async () => {
+  const user = await getUserServer();
   if (user) {
     if (user.image) {
       return (
