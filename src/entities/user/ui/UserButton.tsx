@@ -8,7 +8,13 @@ export const UserButton: React.FC = () => {
   if (user) {
     if (user.image) {
       return (
-        <ImageButton src={user.image} alt={user.name} width={55} height={55} />
+        <ImageButton
+          buttonProps={{ elementType: "link", href: "/user" }}
+          src={user.image}
+          alt={user.name}
+          width={55}
+          height={55}
+        />
       );
     }
     return (

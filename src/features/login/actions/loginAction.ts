@@ -3,16 +3,26 @@
 
 import { UserAuthDto } from "@/entities/user";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-export async function login(user: UserAuthDto) {
+export async function loginAction(user: UserAuthDto) {
     const response = await fetch(`https://localhost:8000/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
     });
 
-    if (!response.ok) return { error: "Invalid credentials" };
+    if (!response.ok) {
+
+        const errorData = await response.json();
+
+        return {
+            error:
+            {
+                status: response.status,
+                message: errorData.message || "Authentication failed"
+            }
+        };
+    }
 
     const cookieStore = await cookies();
 
@@ -31,6 +41,6 @@ export async function login(user: UserAuthDto) {
         });
     }
 
+    return { success: true }
 
-    redirect("/");
 }

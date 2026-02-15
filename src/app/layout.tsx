@@ -1,6 +1,7 @@
 import { Footer } from "@/widgets/Footer";
 import { Navigation } from "@/widgets/Navigation";
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import "../shared/styles/index.css";
 import { AppProvider } from "./AppProvider";
 
@@ -21,6 +22,7 @@ export default async function RootLayout({
           <Navigation />
           {children}
           <Footer />
+          <Toaster invert closeButton position="top-center" />
         </body>
       </html>
     </AppProvider>

@@ -1,1 +1,1 @@
-export { AuthForm } from "./ui";
+export { AuthForm } from "./AuthForm";
