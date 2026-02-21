@@ -1,8 +1,14 @@
-import { User, UserPayload } from "../types"
+"use client"
 
-export const getUser = async (userPayload: UserPayload) => {
+import { User } from "../types";
+import { verify } from "./verify";
+
+export const getUser = async () => {
     try {
-        const response = await fetch(`https://localhost:8000/user/${userPayload.id}`, {
+        const payload = await verify()
+        if (!payload) return null;
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/user/${payload.id}`, {
             headers: {
                 "Content-Type": "application/json",
             }

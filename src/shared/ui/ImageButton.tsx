@@ -23,7 +23,7 @@ export const ImageButton: React.FC<Props> = (props) => {
     >
       <Image
         className="object-cover"
-        src={`${process.env.NEXT_PUBLIC_SERVER_URL}/uploads/${src}`}
+        src={`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/uploads/${src}`}
         alt={alt}
         width={width}
         height={height}

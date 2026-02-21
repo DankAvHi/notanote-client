@@ -1,10 +1,9 @@
 "use client"
 
-import { UserAuthDto } from "@/entities/user";
+import { getUser, register as registerApi, UserAuthDto, useUserStore } from "@/entities/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { registerAction } from "../actions";
 
 export const useRegister = () => {
     const [errors, setErrors] = useState<string | null>(null);
@@ -16,18 +15,19 @@ export const useRegister = () => {
         try {
             setErrors(null);
             setLoading(true);
-            const response = await registerAction(user)
-            if (response.error) {
-                toast.error("Registration failed: " + response.error.message);
-                console.error("Registration failed:", response.error);
-                setErrors(response.error.message)
+            const response = await registerApi(user)
+            if (!response) {
+                toast.error("Login failed");
+                console.error("Login failed");
+                setErrors("Login failed")
             } else {
                 toast.success("Registration successful!");
+                const user = await getUser()
+                useUserStore.setState({ user })
                 router.push("/");
             }
 
         } catch (error) {
-            console.log(error + `sdfasdfasdfasdfasdfasdf`)
             toast.error("Registration failed: " + error);
             console.error("Registration failed:", error);
             setErrors("An error occurred during registration. Please try again.");

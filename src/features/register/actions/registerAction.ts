@@ -2,13 +2,15 @@
 "use server";
 
 import { UserAuthDto } from "@/entities/user";
+import { isProduction } from "@/shared/config";
 import { cookies } from "next/headers";
 
 export async function registerAction(user: UserAuthDto) {
-    const response = await fetch(`https://localhost:8000/auth/register`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
+        credentials: 'include'
     });
 
     if (!response.ok) {
@@ -32,8 +34,8 @@ export async function registerAction(user: UserAuthDto) {
         const [name, value] = nameValue.split('=');
 
         cookieStore.set(name.trim(), value.trim(), {
-            httpOnly: true,
-            secure: true,
+            httpOnly: isProduction,
+            secure: isProduction,
             sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24 * 7,
         });

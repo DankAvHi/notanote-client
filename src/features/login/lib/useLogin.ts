@@ -1,10 +1,9 @@
 "use client"
 
-import { UserAuthDto } from "@/entities/user";
+import { getUser, login as loginApi, UserAuthDto, useUserStore } from "@/entities/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { loginAction } from "../actions";
 
 export const useLogin = () => {
     const [errors, setErrors] = useState<string | null>(null);
@@ -16,14 +15,16 @@ export const useLogin = () => {
         try {
             setErrors(null);
             setLoading(true);
-            const response = await loginAction(user)
-            if (response.error) {
-                toast.error("Login failed: " + response.error.message);
-                console.error("Login failed:", response.error);
-                setErrors(response.error.message)
+            const response = await loginApi(user)
+            if (!response) {
+                toast.error("Login failed");
+                console.error("Login failed");
+                setErrors("Login failed")
             }
             else {
                 toast.success("Login successful!");
+                const user = await getUser()
+                useUserStore.setState({ user })
                 router.push("/");
             }
         } catch (error) {

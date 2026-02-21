@@ -1,8 +1,15 @@
-import { ImageButton, SquareButton } from "@/shared/ui";
-import { getUserServer } from "../api";
+"use client";
 
-export const UserButton: React.FC = async () => {
-  const user = await getUserServer();
+import { ImageButton, Loader, SquareButton } from "@/shared/ui";
+import { useUserStore } from "../model";
+
+export const UserButton: React.FC = () => {
+  const { user } = useUserStore();
+
+  if (typeof user === "undefined") {
+    return <Loader />;
+  }
+
   if (user) {
     if (user.image) {
       return (
@@ -16,7 +23,13 @@ export const UserButton: React.FC = async () => {
       );
     }
     return (
-      <SquareButton buttonProps={{ elementType: "link", href: "/user" }}>
+      <SquareButton
+        buttonProps={{
+          elementType: "link",
+          href: "/user",
+          className: "h-[3.4375rem]",
+        }}
+      >
         {user.name}
       </SquareButton>
     );
@@ -24,7 +37,11 @@ export const UserButton: React.FC = async () => {
   return (
     <SquareButton
       variant="white"
-      buttonProps={{ elementType: "link", href: "/auth" }}
+      buttonProps={{
+        elementType: "link",
+        href: "/auth",
+        className: "h-[3.4375rem]",
+      }}
     >{`Log in`}</SquareButton>
   );
 };

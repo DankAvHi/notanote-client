@@ -24,9 +24,9 @@ export const SquareButton: React.FC<Props> = (props) => {
   const { children, variant = "black-surface", onClick } = props;
   return (
     <Button
-      onClick={onClick}
-      className={`p-5 ${variantStyles[variant]} flex justify-center items-center`}
       {...props.buttonProps}
+      onClick={onClick}
+      className={`p-5 ${variantStyles[variant]} flex justify-center items-center ${props.buttonProps?.className}`}
     >
       <Typography color={textColors[variant]} {...props.typographyProps}>
         {children}

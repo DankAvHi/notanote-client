@@ -1,9 +1,21 @@
+"use client";
+
 import { Typography } from "@/shared/ui";
 import Image from "next/image";
-import { getUserServer } from "../api";
+import { useEffect, useState } from "react";
+import { getUser } from "../api";
+import { User } from "../types";
 
-export const UserCard: React.FC = async () => {
-  const user = await getUserServer();
+export const UserCard: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const callGetUser = async () => {
+      setUser(await getUser());
+    };
+    callGetUser();
+  }, []);
+
   return (
     <section className="border border-(--black-surface) p-5 w-full flex flex-col items-center gap-2.5">
       {user ? (
@@ -13,7 +25,7 @@ export const UserCard: React.FC = async () => {
           </Typography>
           {user.image && (
             <Image
-              src={`${process.env.NEXT_PUBLIC_SERVER_URL}/uploads/${user.image}`}
+              src={`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/uploads/${user.image}`}
               alt="User profile picture"
               width={152}
               height={152}

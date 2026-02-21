@@ -1,4 +1,5 @@
 export { getUser } from "./getUser";
-export { getUserServer } from "./getUserServer";
+export { login } from "./login";
+export { register } from "./register";
 export { verify } from "./verify";
 

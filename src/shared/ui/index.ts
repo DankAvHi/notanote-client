@@ -1,5 +1,6 @@
 export { Button } from "./Button"
 export { ImageButton } from "./ImageButton"
 export { Input } from "./Input"
+export { Loader } from "./Loader"
 export { SquareButton } from "./SquareButton"
 export { Typography } from "./Typography"
