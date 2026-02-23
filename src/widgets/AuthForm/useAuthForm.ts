@@ -1,6 +1,6 @@
 import { UserAuthDto } from "@/entities/user";
-import { useLogin } from "@/features/login";
-import { useRegister } from "@/features/register";
+import { useLogin, useRegister } from "@/features/auth";
+
 import { useState } from "react";
 
 export const useAuthForm = () => {

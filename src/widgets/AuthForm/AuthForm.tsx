@@ -1,6 +1,6 @@
 "use client";
 
-import { Input, SquareButton } from "@/shared/ui";
+import { Input, SquareButton, Typography } from "@/shared/ui";
 import { useAuthForm } from "./useAuthForm";
 
 export const AuthForm: React.FC = () => {
@@ -54,7 +54,7 @@ export const AuthForm: React.FC = () => {
           {"Sign Up"}
         </SquareButton>
       </div>
-      {errors && <p className={`text-(--red)`}>{errors}</p>}
+      {errors && <Typography color="red">{errors}</Typography>}
     </form>
   );
 };

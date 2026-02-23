@@ -1,7 +1,9 @@
-import { ChangePasswordButton } from "@/features/changePassword";
-import { ChangePictureButton } from "@/features/changePicture";
-import { DeleteAccountButton } from "@/features/deleteAccount";
-import { ExitButton } from "@/features/exit";
+import { ExitButton } from "@/features/auth";
+import {
+  ChangePasswordButton,
+  ChangePictureButton,
+  DeleteAccountButton,
+} from "@/features/user";
 
 export const UserActions: React.FC = () => {
   return (
