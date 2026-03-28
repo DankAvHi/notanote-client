@@ -10,11 +10,14 @@ type NoteStore = {
 }
 
 export const useNoteStore = create<NoteStore>((set) => ({
-    notes: undefined,
+    notes: localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') as string) : undefined,
     setNotes: (notes) => set({ notes }),
-    addNote: (note) => set(state => ({
-        notes: state.notes ? [...state.notes, note] : [note]
-    })),
+    addNote: (note) => {
+        localStorage.setItem('notes', JSON.stringify(note))
+        set(state => ({
+            notes: state.notes ? [...state.notes, note] : [note]
+        }))
+    },
     deleteNote: (id) => set(state => ({
         notes: state.notes ? state.notes.filter(note => note.id !== id) : []
     })),

@@ -11,6 +11,9 @@ export const updateNote = async (body: UpdateNoteDto) => {
                 "Content-Type": "application/json",
             }
         })
+
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+
         const note: NoteResponse = await response.json()
         return note
     } catch (e) {

@@ -1,6 +1,6 @@
 "use client"
 
-import { CreateNoteDto, NoteResponse } from "../../../../entities/note/types"
+import { CreateNoteDto, NoteResponse } from "@/entities/note"
 
 export const createNote = async (body: CreateNoteDto) => {
     try {

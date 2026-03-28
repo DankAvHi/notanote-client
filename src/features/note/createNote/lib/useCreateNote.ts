@@ -12,27 +12,44 @@ export const useCreateNote = () => {
 
     const { addNote } = useNoteStore()
 
+    const createNoteLocal = (note: CreateNoteDto) => {
+        const id = crypto.randomUUID();
+
+        addNote({ ...note, id, isChecked: false })
+        toast.success("Note local creating successful!");
+    }
+
     const createNote = async (note: CreateNoteDto) => {
+        setErrors(null);
+        setLoading(true);
+
+        createNoteLocal(note)
+
         try {
-            setErrors(null);
-            setLoading(true);
             const response = await createNoteApi(note)
             if (!response) {
-                toast.error("Note creating failed");
-                console.error("Note creating failed");
-                setErrors("Note creating failed")
-            } else {
-                toast.success("Note creating successful!");
-                addNote(response)
+                const message = "Note syncing failed"
+                toast.error(message);
+                console.error(message);
+                setErrors(message)
             }
-
+            else if ((response as unknown as { error: string }).error) {
+                const message = "Note syncing failed" + (response as unknown as { error: string }).error
+                toast.error(message);
+                console.error(message);
+                setErrors(message)
+            }
+            else {
+                toast.success("Note synced successful!");
+            }
         } catch (error) {
-            toast.error("Note creating failed: " + error);
-            console.error("Note creating failed:", error);
-            setErrors("An error occurred during creating Note. Please try again.");
+            const message = "Note syncing failed: " + error
+            toast.error(message);
+            console.error(message);
+            setErrors(message);
         } finally {
             setLoading(false);
         }
     }
-    return { createNote, errors, loading }
+    return { createNote, errors, loading, createNoteLocal }
 }

@@ -16,6 +16,8 @@ export const Notes: React.FC = () => {
         <Typography color="red">{error}</Typography>
       ) : typeof notes === "undefined" || !notes || loading ? (
         <Loader />
+      ) : notes.length === 0 ? (
+        <Typography color="black-surface">{`No notes yet`}</Typography>
       ) : (
         <NotesList notes={notes} />
       )}

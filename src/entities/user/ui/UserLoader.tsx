@@ -9,8 +9,15 @@ export const UserLoader: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   useEffect(() => {
     const initAuth = async () => {
-      const user = await getUser();
-      useUserStore.setState({ user: user });
+      const isAuth = document.cookie
+        .split(";")
+        .some((item) => item.trim().startsWith("is_auth" + "="));
+      if (isAuth) {
+        const user = await getUser();
+        useUserStore.setState({ user: user });
+      } else {
+        useUserStore.setState({ user: null });
+      }
     };
     initAuth();
   }, []);

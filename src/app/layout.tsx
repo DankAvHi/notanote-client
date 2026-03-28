@@ -3,7 +3,7 @@ import { Footer } from "@/widgets/Footer";
 import { Navigation } from "@/widgets/Navigation";
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
-import { AppProvider } from "./AppProvider";
+import { AppProvider } from "./providers";
 
 export const metadata: Metadata = {
   title: "Notanote",

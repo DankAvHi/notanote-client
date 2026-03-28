@@ -9,6 +9,9 @@ export const getNotes = async () => {
                 "Content-Type": "application/json",
             }
         })
+
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`)
+
         const notes: NotesResponse = await response.json()
         return notes
     } catch (e) {
