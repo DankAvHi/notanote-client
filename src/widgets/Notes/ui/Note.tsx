@@ -1,4 +1,6 @@
-import { SquareButton, Typography } from "@/shared/ui";
+import { DeleteNoteButton } from "@/features/note";
+import { NoteCheckbox } from "@/features/note/updateNote/ui";
+import { Typography } from "@/shared/ui";
 
 type Props = {
   id: string;
@@ -24,13 +26,11 @@ export const Note: React.FC<Props> = ({
         w-full 
         flex items-center gap-2.5`}
     >
+      <NoteCheckbox noteToUpdate={{ id, isChecked }} />
       <Typography size="lg" color="black-surface" className="w-full">
         {text}
       </Typography>
-      <SquareButton
-        buttonProps={{ className: `py-0` }}
-        variant="red"
-      >{`Delete`}</SquareButton>
+      <DeleteNoteButton noteToDelete={{ id }} />
     </li>
   );
 };

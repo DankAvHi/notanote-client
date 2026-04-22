@@ -1,8 +1,9 @@
 "use client";
 
-import { NotesList, useLoadNotes, useNoteStore } from "@/entities/note";
-import { NotesForm } from "@/features/note";
+import { useLoadNotes, useNoteStore } from "@/entities/note";
+import { DeleteAllNotesButton, NotesForm } from "@/features/note";
 import { Loader, Typography } from "@/shared/ui";
+import { NotesList } from "./ui";
 
 export const Notes: React.FC = () => {
   const { loading, error } = useLoadNotes();
@@ -19,7 +20,10 @@ export const Notes: React.FC = () => {
       ) : notes.length === 0 ? (
         <Typography color="black-surface">{`No notes yet`}</Typography>
       ) : (
-        <NotesList notes={notes} />
+        <div className="flex flex-col">
+          <NotesList notes={notes} />
+          <DeleteAllNotesButton />
+        </div>
       )}
     </section>
   );

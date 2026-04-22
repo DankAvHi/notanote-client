@@ -3,11 +3,13 @@ import { Typography, TypographyProps } from "./Typography";
 
 const variantStyles = {
   "black-surface": "border border-white bg-(--black-surface)",
+  "black-surface-no-border": "bg-(--black-surface)",
   white: "border border-(--black-surface) bg-white",
   red: "bg-(--red)",
 };
 const textColors: Record<string, "white" | "black-surface"> = {
   "black-surface": "white",
+  "black-surface-no-border": "white",
   white: "black-surface",
   red: "white",
 };

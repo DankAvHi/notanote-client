@@ -1,11 +1,12 @@
 "use client"
 
-import { DeleteNoteDto, NoteResponse } from "../types"
+import { NoteResponse, UpdateNoteDto } from "@/entities/note"
 
-export const deleteNote = async ({ id }: DeleteNoteDto) => {
+export const updateNote = async (body: UpdateNoteDto) => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/note/${id}`, {
-            method: "DELETE",
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/note`, {
+            body: JSON.stringify(body),
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             }

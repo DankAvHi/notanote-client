@@ -22,12 +22,19 @@ export type GetNoteDto = {
 export type DeleteNoteDto = {
     id: string
 }
-
-export type CreateNoteDto = {
+export type CheckNoteDto = {
+    id: string
+}
+export type NoteRaw = {
     text: string
+}
+export type CreateNoteDto = {
+    id: string;
+    text: string;
+    isChecked: boolean;
 }
 export type UpdateNoteDto = {
     id: string;
-    text: string,
-    isChecked: string
+    text?: string,
+    isChecked?: boolean
 }

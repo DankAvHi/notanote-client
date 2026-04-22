@@ -5,6 +5,23 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { getNotes as getNotesApi } from "../api";
 import { useNoteStore } from "../model";
+import { Notes } from "../types";
+
+const getNotesFromLocalStorage = () => {
+    const stored = localStorage.getItem('notes-storage')
+    if (stored) {
+        try {
+            const parsed = JSON.parse(stored);
+            if (parsed.state?.notes) {
+                return parsed.state.notes as Notes
+            }
+        } catch {
+            console.error('Failed to parse notes from localStorage');
+            return null
+        }
+    }
+    return null
+}
 
 export const useLoadNotes = () => {
     const [loading, setLoading] = useState(false);
@@ -14,7 +31,7 @@ export const useLoadNotes = () => {
     const setNotes = useNoteStore((state) => state.setNotes);
 
     useEffect(() => {
-        const load = async () => {
+        const loadFromCloud = async () => {
             try {
                 setLoading(true);
                 const notes = await getNotesApi();
@@ -31,10 +48,21 @@ export const useLoadNotes = () => {
                 setLoading(false);
             }
         };
+
+        const loadFromLocalStorage = () => {
+            const localNotes = getNotesFromLocalStorage()
+            if (localNotes) {
+                setNotes(localNotes);
+            } else {
+                setNotes([])
+            }
+            setLoading(false)
+        };
+
         if (user) {
-            load();
+            loadFromCloud();
         } else {
-            setNotes([])
+            loadFromLocalStorage();
         }
 
     }, [setNotes, user]);

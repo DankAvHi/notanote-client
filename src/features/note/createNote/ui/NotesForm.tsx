@@ -1,6 +1,6 @@
 "use client";
 
-import { Input, Typography } from "@/shared/ui";
+import { Input, SquareButton, Typography } from "@/shared/ui";
 import { useState } from "react";
 import { useCreateNote } from "../lib/useCreateNote";
 
@@ -17,17 +17,21 @@ export const NotesForm: React.FC = () => {
   ) => {
     event.preventDefault();
     await createNote({ text: inputValue });
+    setInputValue("");
   };
 
   return (
     <form className="w-full" onSubmit={formOnSubmitHandler}>
-      <Input
-        enterKeyHint="send"
-        placeholder="do not note a note!!!"
-        value={inputValue}
-        onChange={inputOnChangeHandler}
-        disabled={loading}
-      />
+      <div className="flex items-stretch">
+        <Input
+          enterKeyHint="send"
+          placeholder="do not note a note!!!"
+          value={inputValue}
+          onChange={inputOnChangeHandler}
+          disabled={loading}
+        />
+        <SquareButton variant="black-surface-no-border">{`Create`}</SquareButton>
+      </div>
       {errors ? <Typography color="red">{errors}</Typography> : <></>}
     </form>
   );

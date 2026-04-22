@@ -1,3 +1,3 @@
 export { useLoadNotes, useNoteStore } from "./model";
-export type { CreateNoteDto, NoteResponse } from "./types";
-export { Note, NotesList } from "./ui";
+export type { CreateNoteDto, DeleteNoteDto, NoteRaw, NoteResponse, UpdateNoteDto } from "./types";
+

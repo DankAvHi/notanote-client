@@ -1,0 +1,1 @@
+export { useDeleteAllNotes } from "./useDeleteAllNotes";

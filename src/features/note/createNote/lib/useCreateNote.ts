@@ -1,7 +1,7 @@
 "use client"
 
-import { useNoteStore } from "@/entities/note/model";
-import { CreateNoteDto } from "@/entities/note/types";
+import { NoteRaw, useNoteStore } from "@/entities/note";
+import { useUserStore } from "@/entities/user";
 import { useState } from "react";
 import { toast } from "sonner";
 import { createNote as createNoteApi } from "../api";
@@ -9,21 +9,28 @@ import { createNote as createNoteApi } from "../api";
 export const useCreateNote = () => {
     const [errors, setErrors] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const { user } = useUserStore()
 
-    const { addNote } = useNoteStore()
+    const { addNote, updateNote } = useNoteStore()
 
-    const createNoteLocal = (note: CreateNoteDto) => {
+    const createNoteLocal = (noteDto: NoteRaw) => {
         const id = crypto.randomUUID();
-
-        addNote({ ...note, id, isChecked: false })
+        const note = { ...noteDto, id, isChecked: false }
+        addNote(note)
         toast.success("Note local creating successful!");
+        return note
     }
 
-    const createNote = async (note: CreateNoteDto) => {
+    const createNote = async (noteDto: NoteRaw) => {
         setErrors(null);
         setLoading(true);
 
-        createNoteLocal(note)
+        const note = createNoteLocal(noteDto)
+
+        if (!user) {
+            setLoading(false)
+            return
+        }
 
         try {
             const response = await createNoteApi(note)
@@ -40,6 +47,7 @@ export const useCreateNote = () => {
                 setErrors(message)
             }
             else {
+                updateNote(note.id, response)
                 toast.success("Note synced successful!");
             }
         } catch (error) {
