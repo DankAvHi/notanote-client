@@ -1,2 +1,2 @@
-export { DeleteAccountButton } from "./DeleteAccountButton";
+export { DeleteAccountButton } from "./ui";
 

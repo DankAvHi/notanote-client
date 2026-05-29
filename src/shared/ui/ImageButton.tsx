@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image, { ImageProps } from "next/image";
-import { Button, CustomButtonProps } from "./Button";
+import Image, { ImageProps } from 'next/image';
+import { Button, CustomButtonProps } from './Button';
 
 type Props = {
   src: string;
@@ -22,13 +22,13 @@ export const ImageButton: React.FC<Props> = (props) => {
       {...props.buttonProps}
     >
       <Image
-        className="object-cover"
+        className="object-cover w-full h-full"
         src={`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/uploads/${src}`}
         alt={alt}
         width={width}
         height={height}
         {...props.imageProps}
-        unoptimized={process.env.NEXT_PUBLIC_NODE_ENV === "development"}
+        unoptimized={process.env.NEXT_PUBLIC_NODE_ENV === 'development'}
       />
     </Button>
   );

@@ -1,0 +1,1 @@
+export { changePicture } from './changePicture';

@@ -1,20 +1,11 @@
-"use client";
+'use client';
 
-import { Typography } from "@/shared/ui";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getUser } from "../api";
-import { User } from "../types";
+import { Typography } from '@/shared/ui';
+import Image from 'next/image';
+import { useUserStore } from '../model';
 
 export const UserCard: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const callGetUser = async () => {
-      setUser(await getUser());
-    };
-    callGetUser();
-  }, []);
+  const user = useUserStore().user;
 
   return (
     <section className="border border-(--black-surface) p-5 w-full flex flex-col items-center gap-2.5">
@@ -24,14 +15,16 @@ export const UserCard: React.FC = () => {
             {`Your account:`}
           </Typography>
           {user.image && (
-            <Image
-              src={`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/uploads/${user.image}`}
-              alt="User profile picture"
-              width={152}
-              height={152}
-              className="rounded-full"
-              unoptimized={process.env.NEXT_PUBLIC_NODE_ENV === "development"}
-            />
+            <div className="w-38 h-38">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_SERVER_LOCAL_URL}/uploads/${user.image}`}
+                alt="User profile picture"
+                width={152}
+                height={152}
+                className="rounded-full object-cover w-full h-full"
+                unoptimized={process.env.NEXT_PUBLIC_NODE_ENV === 'development'}
+              />
+            </div>
           )}
           <Typography color="black-surface">{user.name}</Typography>
         </>

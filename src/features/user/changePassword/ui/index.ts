@@ -1,0 +1,2 @@
+export { ChangePasswordButton } from "./ChangePasswordButton";
+

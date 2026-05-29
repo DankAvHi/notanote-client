@@ -1,33 +1,39 @@
-"use client";
+'use client';
 
-import { ImageButton, Loader, SquareButton } from "@/shared/ui";
-import { useUserStore } from "../model";
+import { ImageButton, Loader, SquareButton } from '@/shared/ui';
+import { useUserStore } from '../model';
 
 export const UserButton: React.FC = () => {
   const { user } = useUserStore();
 
-  if (typeof user === "undefined") {
+  if (typeof user === 'undefined') {
     return <Loader />;
   }
 
   if (user) {
     if (user.image) {
       return (
-        <ImageButton
-          buttonProps={{ elementType: "link", href: "/user" }}
-          src={user.image}
-          alt={user.name}
-          width={55}
-          height={55}
-        />
+        <div className="w-[3.438rem] h-[3.438rem]">
+          <ImageButton
+            buttonProps={{
+              elementType: 'link',
+              href: '/user',
+              className: 'w-full h-full',
+            }}
+            src={user.image}
+            alt={user.name}
+            width={55}
+            height={55}
+          />
+        </div>
       );
     }
     return (
       <SquareButton
         buttonProps={{
-          elementType: "link",
-          href: "/user",
-          className: "h-[3.4375rem]",
+          elementType: 'link',
+          href: '/user',
+          className: 'h-[3.4375rem]',
         }}
       >
         {user.name}
@@ -38,9 +44,9 @@ export const UserButton: React.FC = () => {
     <SquareButton
       variant="white"
       buttonProps={{
-        elementType: "link",
-        href: "/auth",
-        className: "h-[3.4375rem]",
+        elementType: 'link',
+        href: '/auth',
+        className: 'h-[3.4375rem]',
       }}
     >{`Log in`}</SquareButton>
   );

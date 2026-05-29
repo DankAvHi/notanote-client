@@ -1,2 +1,2 @@
-export { ChangePictureButton } from "./ChangePictureButton";
+export { ChangePictureButton } from "./ui";
 

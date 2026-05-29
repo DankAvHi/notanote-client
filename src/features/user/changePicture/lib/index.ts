@@ -1,0 +1,1 @@
+export { useChangePicture } from './useChangePicture';
