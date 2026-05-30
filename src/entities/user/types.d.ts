@@ -20,3 +20,8 @@ export type UserAuthDto = {
 export type UserChangePictureDto = {
   picture: File;
 };
+
+export type UserChangePasswordDto = {
+  oldPassword: string;
+  newPassword: string;
+};

@@ -5,6 +5,7 @@
 
   --white: #ffffff;
   --white-surface: #efefef;
+  --white-surface-64: rgba(239, 239, 239, 0.64);
 
   --red: #eb3939;
 }
