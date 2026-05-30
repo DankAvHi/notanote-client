@@ -1,7 +1,8 @@
 import { UserChangePasswordDto } from '@/entities/user';
+import { useFetcher } from '@/shared/api/useFetcher';
 import { Input, SquareButton, Typography } from '@/shared/ui';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useChangePassword } from '../lib';
+import { changePassword } from '../api';
 
 const initialForm: UserChangePasswordDto = {
   oldPassword: '',
@@ -15,14 +16,18 @@ type Props = {
 export const ChangePasswordForm: React.FC<Props> = ({
   onSubmit: onSubmitProps,
 }) => {
-  const { changePassword, errors, loading } = useChangePassword();
+  const { execute, errors, loading } = useFetcher(changePassword);
 
   const [form, setForm] = useState<UserChangePasswordDto>(initialForm);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const success = await changePassword(form);
-    if (success) onSubmitProps();
+    const response = await execute(form);
+
+    if (!response.isError) {
+      onSubmitProps();
+    }
+    setForm(initialForm);
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -35,6 +40,7 @@ export const ChangePasswordForm: React.FC<Props> = ({
         placeholder="Enter old password"
         type="password"
         onChange={onChange}
+        value={form['oldPassword']}
       />
 
       <Input
@@ -42,6 +48,7 @@ export const ChangePasswordForm: React.FC<Props> = ({
         placeholder="Enter new password"
         type="password"
         onChange={onChange}
+        value={form['newPassword']}
       />
 
       <SquareButton

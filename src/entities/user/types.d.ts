@@ -25,3 +25,7 @@ export type UserChangePasswordDto = {
   oldPassword: string;
   newPassword: string;
 };
+
+export type UserChangePasswordResponse = {
+  accessToken: string;
+};
